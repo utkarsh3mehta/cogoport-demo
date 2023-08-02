@@ -12,7 +12,7 @@ import { Login } from "./components/login/index.jsx";
 import { ProtectedRoute } from "./components/protectedRoute/index.jsx";
 import { Home } from "./components/home/index.jsx";
 import { Logout } from "./components/login/logout.jsx";
-
+import { LoggedOutProtectedRoute } from "./components/protectedRoute/loggedout.jsx";
 
 const router = createBrowserRouter([
   { path: "/login", element: <Login /> },
@@ -25,7 +25,15 @@ const router = createBrowserRouter([
         path: "",
         element: <Home />,
       },
+      { path: "/secure", element: <div>Secure</div> },
+      { path: "/contact", element: <div>contact</div> },
+      { path: "/teacher", element: <div>Teacher page</div> },
     ],
+  },
+  {
+    path: "/about",
+    element: <LoggedOutProtectedRoute />,
+    children: [{ path: "", element: <div>About</div> }],
   },
 ]);
 
