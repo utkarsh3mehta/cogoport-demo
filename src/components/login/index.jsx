@@ -8,17 +8,23 @@ export const Login = () => {
   const [isNew, setIsNew] = useState(true);
   const changeLogIn = () => setIsNew((prev) => !prev);
 
-  // TODO: for automatic home page
-  // useEffect(() => {
-  //   if (localStorage.getItem("demo_user")) {
-  //     navigate("/");
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (localStorage.getItem("demo_user")) {
+      navigate("/");
+    }
+  }, []);
+
   return (
     <div>
-      <h2>Login Page</h2>
-      <p onClick={changeLogIn} className="mb-10">{isNew ? "Sign In" : "Sign Up"} instead</p>
-      {isNew ? <SignUp /> : <SignIn />}
+      <h2 className="">Login Page</h2>
+      <p onClick={changeLogIn} className="mb-10">
+        {!isNew ? "Sign In" : "Sign Up"} instead
+      </p>
+      {!isNew ? <SignUp /> : <SignIn />}
     </div>
   );
 };
+
+/**
+ * <input style="justify-content: start; margin: 1rem" class="justify-content-start" />
+ */

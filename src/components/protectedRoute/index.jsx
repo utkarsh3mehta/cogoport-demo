@@ -17,9 +17,11 @@ export const ProtectedRoute = () => {
     try {
       // check if user exists
       console.log("use effect");
-      if (localStorage.getItem("demo_user")) {
+      let userType;
+      if ((userType = localStorage.getItem("demo_user"))) {
         console.log("local storage exists");
-        setUser(true);
+        if (userType === "student") setUser(true);
+        else navigate("/teacher");
       } else {
         console.log("local storage does not exist");
         navigate("/login");
