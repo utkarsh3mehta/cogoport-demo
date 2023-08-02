@@ -1,0 +1,40 @@
+import React, { useEffect, useState } from "react";
+import { Navigate, Outlet, useNavigate } from "react-router-dom";
+
+export const ProtectedRoute = () => {
+  const navigate = useNavigate();
+  /**
+   * State to save user details, status
+   */
+  const [user, setUser] = useState(false);
+
+  /**
+   * Run this when the component is loaded for the first time
+   *
+   * Check if user exists
+   */
+  useEffect(() => {
+    try {
+      // check if user exists
+      console.log("use effect");
+      if (localStorage.getItem("demo_user")) {
+        console.log("local storage exists");
+        setUser(true);
+      } else {
+        console.log("local storage does not exist");
+        navigate("/login");
+      }
+    } catch (err) {
+      console.log("catch block", err);
+      setUser(false);
+      navigate("/login");
+    }
+  }, []);
+
+  /**
+   * If user exists, return whatever you want
+   * Else, take user to login back
+   */
+  console.log({ user });
+  return <Outlet />;
+};
